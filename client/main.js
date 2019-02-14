@@ -4,7 +4,13 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import './main.html';
 import '../lib/collections.js';
 
-Template.profile.events({
+Template.profiles.helpers({
+	profFname(){
+		return userDB.findOne({}).firstName;
+	}
+});
+
+Template.profiles.events({
   'click .js-like'(event, instance) {
 	console.log("You clicked like");    
   },
@@ -29,5 +35,6 @@ Template.addProfile.events({
 		$("#exampleModal input[name='image']").val('');
 		// Close the modal
 		$("#exampleModal").modal("hide");
+		userDB.insert({'firstName':fName, 'lastName':lName, 'img':image});
   }
 });
