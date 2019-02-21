@@ -11,8 +11,15 @@ Template.profiles.helpers({
 });
 
 Template.profiles.events({
-  'click .js-like'(event, instance) {
-	console.log("You clicked like");    
+  'click .js-like'(event, instance) {	
+	var profID = this._id;
+	var numLikes = userDB.findOne({_id:  profID}).like;
+	if (!numLikes) {
+		numLikes = 0;
+	}
+	numLikes = numLikes + 1;
+	console.log("You have",numLikes);
+	userDB.update({_id:profID}, {$set:{'like': numLikes}});
   },
   'click .js-dislike'(event, instance){
 	alert("Clicked dislike");
