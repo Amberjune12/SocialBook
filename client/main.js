@@ -17,12 +17,17 @@ Template.profiles.events({
 	if (!numLikes) {
 		numLikes = 0;
 	}
-	numLikes = numLikes + 1;
-	console.log("You have",numLikes);
+	numLikes = numLikes + 1;	
 	userDB.update({_id:profID}, {$set:{'like': numLikes}});
   },
   'click .js-dislike'(event, instance){
-	alert("Clicked dislike");
+	var profID = this._id;
+	var numDisLikes = userDB.findOne({_id:  profID}).dislike;
+	if (!numDisLikes) {
+		numDisLikes = 0;
+	}
+	numDisLikes = numDisLikes + 1;	
+	userDB.update({_id:profID}, {$set:{'dislike': numDisLikes}});
   },
   'click .js-delete'(event, instance){
   	// console.log(this._id);
