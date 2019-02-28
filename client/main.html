@@ -13,29 +13,32 @@
 		<div class="row justify-content-around">
 			{{> profiles}}		
 		</div>
+		{{> editUser}}
 	</div>  
 </body>
 
 <template name="profiles">
 	{{#each profAll}}
 		<div id={{_id}} class="col-4"> <!-- beginnig of profile col -->
-			<div class="row justify-content-end">
+<!-- 			<div class="row justify-content-end">
 				<div class="col-1">
 					<i class="zmdi zmdi-hc-2x zmdi-delete js-delete"></i>
 				</div>
-			</div>
+			</div> -->
+		<a class="viewUser" data-toggle="modal" data-target="#editUserModal">
+			<div class="row justify-content-around">
+				<div class="col-sm-12 text-center">
+					<img class="profPic" src="{{img}}" alt="">
+				</div>
+			</div> <!-- / profile picture -->
+			<div class="row justify-content-around">
+				<div class="col-sm-10 text-center">
+					<h1 class="display-5">{{firstName}}&nbsp;{{lastName}}</h1>
+				</div>
+			</div> <!-- / profile name -->
+		</a>
 		<div class="row justify-content-around">
-			<div class="col-sm-12 text-center">
-				<img class="profPic" src="{{img}}" alt="">
-			</div>
-		</div> <!-- / profile picture -->
-		<div class="row justify-content-around">
-			<div class="col-sm-2">
-				<h1 class="display-4">{{firstName}}&nbsp;{{lastName}}</h1>
-			</div>
-		</div> <!-- / profile name -->
-		<div class="row justify-content-around">
-			<div class="col-sm-4">
+			<div class="col-sm-7">
 				<div class="row justify-content-between">
 					<div class="col-sm-5 text-center">						
 						<button class="btn btn-primary js-like">Like</button>
@@ -56,7 +59,7 @@
 	<!-- Button trigger modal -->
 	<div class="row justify-content-around">
 		<div class="col-3">
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addUserModal">
 	  		Add a profile
 			</button>			
 		</div>
@@ -64,11 +67,11 @@
 	
 
 	<!-- Modal -->
-	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
 	  <div class="modal-dialog" role="document">
 		<div class="modal-content">
 		  <div class="modal-header">
-			<h5 class="modal-title" id="exampleModalLabel">Add Profile</h5>
+			<h5 class="modal-title" id="addUserModalLabel">Add Profile</h5>
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			  <span aria-hidden="true">&times;</span>
 			</button>
@@ -100,4 +103,28 @@
 		</div>
 	  </div>
 	</div>
+</template>
+
+<template name="editUser">
+<!-- Modal -->
+<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editUserModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="viewUserProfile">
+        <input id="userId" type="hidden">
+        <img class="profPic" src="user-512.png" alt="">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 </template>
